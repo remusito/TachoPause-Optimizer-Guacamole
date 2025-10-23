@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useAuth } from '@/firebase/auth/provider';
 import { useRouter } from 'next/navigation';
-import { addLoad } from '@/app/actions';
+import { addLoad } from '@/app/loads/actions';
 import { toast } from 'sonner';
 
 export default function AddLoadPage() {

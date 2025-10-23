@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { getWorkdaySummary, getBiweeklyDrivingHours } from '@/lib/workday-helpers';
 import { useAuth } from '@/firebase';
 import { getFirestore, collection, query, where, Query } from 'firebase/firestore';
+import type { Workday } from '@/types/workday'; // Import the Workday type
 
 export function WeeklyWorkdaySummary() {
   const { user } = useAuth();
@@ -23,7 +24,7 @@ export function WeeklyWorkdaySummary() {
 
       const q = query(
         collection(firestore, `users/${user.uid}/workdays`),
-        where('startTime', '>=', startDate.getTime())
+        where('startTime', '>=', startDate.getTime()) // Querying by timestamp number
       );
       setWorkdaysQuery(q);
     } else {
@@ -31,12 +32,14 @@ export function WeeklyWorkdaySummary() {
     }
   }, [user]);
 
-  const { data: workdays, loading } = useCollection(workdaysQuery);
+  // Explicitly type the data from useCollection
+  const { data: workdays, loading } = useCollection<Workday>(workdaysQuery);
   const [weeklySummary, setWeeklySummary] = useState<any>(null);
   const [biweeklyHours, setBiweeklyHours] = useState(0);
 
   useEffect(() => {
-    if (workdays) {
+    // The type of workdays is now correctly inferred as Workday[]
+    if (workdays && workdays.length > 0) {
       const summary = getWorkdaySummary(workdays);
       setWeeklySummary(summary);
       
@@ -50,11 +53,22 @@ export function WeeklyWorkdaySummary() {
     const hours = data?.totalDriving / 3600000 || 0;
     const dayAbbreviation = day.substring(0, 3);
 
+    // Handle Firestore Timestamps safely
+    const formatTime = (timestamp: any) => {
+      if (!timestamp) return 'N/A';
+      // Timestamps from Firestore might be objects with seconds and nanoseconds
+      if (timestamp.seconds) {
+        return new Date(timestamp.seconds * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      }
+      // Or they could already be Date objects or milliseconds
+      return new Date(timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
+
     return (
       <div key={day} className="flex items-center justify-between py-1 text-sm border-b last:border-b-0">
         <span className="font-medium capitalize w-12">{dayAbbreviation}</span>
         <span className="text-xs text-center text-muted-foreground">
-          {data ? `${new Date(data.startTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - ${new Date(data.endTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}` : 'Sin registro'}
+          {data ? `${formatTime(data.startTime)} - ${formatTime(data.endTime)}` : 'Sin registro'}
         </span>
         <span className="font-semibold text-right w-16">{hours.toFixed(1)}h</span>
       </div>
