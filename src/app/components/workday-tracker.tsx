@@ -12,7 +12,8 @@ import {
 } from '@/components/ui/tooltip';
 import { useAuth } from '@/firebase/auth/provider';
 import { startWorkday, logWorkdayEvent, updateWorkdayTimes } from '@/app/workdays/actions';
-import { Workday } from '@/types/workday';
+// Import the serializable type for data coming from server actions
+import type { SerializableWorkday } from '@/types/workday';
 
 // --- Helper Functions ---
 function formatTime(seconds: number): string {
@@ -28,7 +29,8 @@ const TIME_UPDATE_INTERVAL_MS = 5000; // Update server every 5 seconds
 // --- Main Component ---
 export function WorkdayTracker() {
   const { user } = useAuth();
-  const [activeWorkday, setActiveWorkday] = useState<Workday | null>(null);
+  // Use the SerializableWorkday type for state that holds server action results
+  const [activeWorkday, setActiveWorkday] = useState<SerializableWorkday | null>(null);
   const [isWorkdayActive, setIsWorkdayActive] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
   const [currentSpeed, setCurrentSpeed] = useState(0);
