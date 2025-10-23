@@ -3,8 +3,7 @@
 import { ReactNode } from 'react';
 import { AuthProvider } from '@/firebase/auth/provider';
 import { ThemeProvider } from 'next-themes';
-// Corrected import path for the Toaster component
-import { Toaster } from '@/components/ui/toaster'; 
+import { Toaster } from "@/components/ui/toaster"
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
@@ -17,7 +16,7 @@ export function Providers({ children }: { children: ReactNode }) {
         <PayPalScriptProvider options={{ 'clientId': PAYPAL_CLIENT_ID, currency: 'EUR', intent: 'capture' }}>
           <TooltipProvider>
             {children}
-            <Toaster richColors position="top-center" />
+            <Toaster />
           </TooltipProvider>
         </PayPalScriptProvider>
       </AuthProvider>
