@@ -1,7 +1,7 @@
 'use server';
 
-import { getAdminApp } from "@/firebase/server";
-import { firestore } from "firebase-admin";
+import { firestore } from "@/firebase/server"; // Correctly import the initialized firestore instance
+import { FieldValue } from "firebase-admin/firestore";
 
 // Define the type for a new load based on the form fields
 interface NewLoad {
@@ -28,14 +28,14 @@ export async function addLoad(userId: string, loadData: NewLoad) {
   }
 
   try {
-    const adminApp = getAdminApp();
-    const db = firestore(adminApp);
+    // Use the imported firestore instance directly
+    const db = firestore;
     
     // Add a server-side timestamp
     const loadWithTimestamp = {
       ...loadData,
-      createdAt: firestore.FieldValue.serverTimestamp(),
-      updatedAt: firestore.FieldValue.serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
       userId: userId, // Store the userId with the load
     };
 
@@ -44,8 +44,6 @@ export async function addLoad(userId: string, loadData: NewLoad) {
     
     console.log(`New load with ID: ${loadRef.id} added for user: ${userId}`);
     
-    // The function doesn't need to return anything on success, 
-    // but you could return the ID if needed.
     return { id: loadRef.id };
 
   } catch (error) {
