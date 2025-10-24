@@ -1,13 +1,25 @@
 import { Workday } from '@/types/workday';
 
-export const getWorkdaySummary = (workdays: Workday[]) => {
-  const summary = {
+interface DaySummary {
+  startTime: Workday['startTime'];
+  endTime: Workday['endTime'];
+  totalDriving: number;
+}
+
+interface WorkdaySummary {
+  totalDriving: number;
+  days: {
+    [key: string]: DaySummary;
+  };
+}
+
+export const getWorkdaySummary = (workdays: Workday[]): WorkdaySummary => {
+  const summary: WorkdaySummary = {
     totalDriving: 0,
     days: {},
   };
 
   workdays.forEach(wd => {
-    // Ensure startTime is a number (milliseconds) before creating a Date
     const startTimeMs = wd.startTime instanceof Date ? wd.startTime.getTime() : (wd.startTime.seconds * 1000);
     const date = new Date(startTimeMs);
     const dayName = date.toLocaleDateString('es-ES', { weekday: 'long' });
@@ -21,8 +33,7 @@ export const getWorkdaySummary = (workdays: Workday[]) => {
       };
     }
     
-    // Use totalDrivingTimeSeconds for calculations
-    const drivingTime = wd.totalDrivingTimeSeconds * 1000; // convert to ms
+    const drivingTime = wd.totalDrivingTimeSeconds * 1000;
     summary.days[dayKey].totalDriving += drivingTime;
     summary.totalDriving += drivingTime;
   });
@@ -31,7 +42,6 @@ export const getWorkdaySummary = (workdays: Workday[]) => {
 };
 
 export const getBiweeklyDrivingHours = (currentWeekWorkdays: Workday[], previousWeekWorkdays: Workday[]) => {
-  // Convert totalDrivingTimeSeconds to hours
   const currentWeekHours = currentWeekWorkdays.reduce((total, wd) => total + (wd.totalDrivingTimeSeconds / 3600), 0);
   const previousWeekHours = previousWeekWorkdays.reduce((total, wd) => total + (wd.totalDrivingTimeSeconds / 3600), 0);
 

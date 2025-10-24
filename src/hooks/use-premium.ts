@@ -10,9 +10,9 @@ import { useDeveloperMode } from './use-developer-mode';
  */
 export function usePremium() {
   const { isPremium: isUserPremium } = useAuth();
-  const { isDeveloperModeActive } = useDeveloperMode();
+  const { isActive } = useDeveloperMode();
 
-  const isPremium = isUserPremium || isDeveloperModeActive;
+  const isPremium = isUserPremium || isActive;
 
   return { isPremium };
 }
