@@ -35,25 +35,25 @@ export async function startWorkday(userId: string): Promise<SerializableWorkday>
     return serializeFirestoreData<SerializableWorkday>(workdayDoc);
   }
 
-  const newWorkday: Workday = {
+  const newWorkdayData = {
     id: workdayId,
     userId,
-    startTime: Timestamp.fromDate(today),
+    startTime: FieldValue.serverTimestamp(),
     endTime: null,
-    status: 'active',
+    status: 'active' as const,
     totalDrivingTimeSeconds: 0,
     totalPauseTimeSeconds: 0,
   };
 
-  await workdayRef.set(newWorkday);
+  await workdayRef.set(newWorkdayData);
   await logWorkdayEvent(userId, workdayId, 'WORKDAY_START');
   const newWorkdayDoc = await workdayRef.get();
   return serializeFirestoreData<SerializableWorkday>(newWorkdayDoc);
 }
 
 export async function logWorkdayEvent(userId: string, workdayId: string, eventType: WorkdayEvent['type']): Promise<void> {
-  const event: Omit<WorkdayEvent, 'id'> = {
-    timestamp: Timestamp.now(),
+  const event = {
+    timestamp: FieldValue.serverTimestamp(),
     type: eventType,
   };
   
@@ -63,7 +63,7 @@ export async function logWorkdayEvent(userId: string, workdayId: string, eventTy
   if (eventType === 'WORKDAY_END') {
       const workdayRef = firestore.collection('users').doc(userId).collection('workdays').doc(workdayId);
       await workdayRef.update({ 
-          endTime: event.timestamp,
+          endTime: FieldValue.serverTimestamp(),
           status: 'finished'
       });
   }
