@@ -31,10 +31,17 @@ import {
   User,
   Wrench,
   X,
-  Award,  Gauge as Speedometer, Milestone, Timer, Map as MapIcon, Route, BarChart2,
+  Award,  
+  Gauge as Speedometer, 
+  Milestone, 
+  Timer, 
+  Map as MapIcon, 
+  Route,
+  BarChart2,
   Crown,
   Pause,
-  Gauge
+  Gauge,
+  Shield
 } from "lucide-react"
 
 export const Icons = {
@@ -87,5 +94,6 @@ export const Icons = {
   share: Share,
   Premium: Crown,
   Pause: Pause,
-  Gauge: Gauge
+  Gauge: Gauge,
+  Shield: Shield
 }
