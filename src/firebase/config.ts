@@ -12,12 +12,17 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-const auth = getAuth(app);
-const db = getFirestore(app);
+// Solo inicializa si estamos en el cliente
+let app: any;
+let auth: any;
+let db: any;
 
-// ✅ SOLO ejecuta setPersistence en el CLIENTE
 if (typeof window !== 'undefined') {
+  app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+  auth = getAuth(app);
+  db = getFirestore(app);
+  
+  // setPersistence solo en cliente
   setPersistence(auth, browserLocalPersistence).catch(console.error);
 }
 
