@@ -29,7 +29,7 @@ const mapOptions = {
   mapTypeControl: false,
 };
 
-const libraries: ("places" | "routes" | "geocoding")[] = ['places', 'routes', 'geocoding'];
+const libraries: ("places")[] = ['places'];
 
 // Componente principal
 export default function RouteOptimizerPage() {
