@@ -1,3 +1,4 @@
+
 'use client';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
@@ -28,6 +29,9 @@ const mapOptions = {
   mapTypeControl: false,
 };
 
+// Define las bibliotecas fuera del componente para evitar re-renders
+const libraries: ("places")[] = ['places'];
+
 // Componente principal
 export default function RouteOptimizerPage() {
   const { user, loading } = useAuth();
@@ -37,7 +41,7 @@ export default function RouteOptimizerPage() {
   // Hook de carga de la API de Google Maps
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
-    libraries: ['places', 'directions', 'geocoding'],
+    libraries, // Usa la constante definida arriba
   });
 
   const [stops, setStops] = useState(['', '']);
