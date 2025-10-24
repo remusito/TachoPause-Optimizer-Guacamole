@@ -82,7 +82,7 @@ const menuStructure = [
     icon: Icons.FileText,
     items: [
         { href: '/privacy-policy', icon: Icons.Shield, label: 'Política de Privacidad', premium: false },
-        { href: '/terms-of-service', icon: Icons.File, label: 'Términos de Uso', premium: false },
+        { href: '/terms-of-service', icon: Icons.page, label: 'Términos de Uso', premium: false },
     ]
   },
   { 
