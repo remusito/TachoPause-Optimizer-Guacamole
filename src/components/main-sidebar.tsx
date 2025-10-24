@@ -73,7 +73,7 @@ const menuStructure = [
     label: 'Guías y Reglamento',
     icon: Icons.BookOpen,
     items: [
-      { href: '/tutorial', icon: Icons.BookOpen, label: 'Guía de Uso', premium: false },
+      // { href: '/tutorial', icon: Icons.BookOpen, label: 'Guía de Uso', premium: false },
       { href: '/regulations', icon: Icons.FileText, label: 'Reglamento', premium: false },
     ]
   },
@@ -81,8 +81,8 @@ const menuStructure = [
     label: "Información Legal",
     icon: Icons.FileText,
     items: [
-        { href: '/privacy-policy', icon: Icons.File, label: 'Política de Privacidad', premium: false },
-        { href: '/terms-of-service', icon: Icons.File, label: 'Términos de Uso', premium: false },
+        { href: '/privacy-policy', icon: Icons.FileText, label: 'Política de Privacidad', premium: false },
+        { href: '/terms-of-service', icon: Icons.FileText, label: 'Términos de Uso', premium: false },
     ]
   },
   { 
