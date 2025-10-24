@@ -16,6 +16,9 @@ const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-setPersistence(auth, browserLocalPersistence).catch(console.error);
+// ✅ SOLO ejecuta setPersistence en el CLIENTE
+if (typeof window !== 'undefined') {
+  setPersistence(auth, browserLocalPersistence).catch(console.error);
+}
 
 export { app, auth, db };
