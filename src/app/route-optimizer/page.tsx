@@ -1,4 +1,3 @@
-
 'use client';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
@@ -10,10 +9,10 @@ import {
   InfoWindow,
 } from '@react-google-maps/api';
 import { FaMapMarkerAlt, FaPlus, FaTrash, FaRoute } from 'react-icons/fa';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/firebase/auth/provider';
 import { useRouter } from 'next/navigation';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase/config';
+import { db } from '@/firebase/config';
 
 // Estilos y opciones del mapa
 const containerStyle = {
@@ -38,7 +37,7 @@ export default function RouteOptimizerPage() {
   // Hook de carga de la API de Google Maps
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
-    libraries: ['places', 'directions', 'geocoding'], // <-- LA CORRECCIÓN ESTÁ AQUÍ
+    libraries: ['places', 'directions', 'geocoding'],
   });
 
   const [stops, setStops] = useState(['', '']);
