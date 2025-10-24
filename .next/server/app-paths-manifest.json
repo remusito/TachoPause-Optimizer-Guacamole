@@ -1,7 +1,1 @@
-{
-  "/page": "app/page.js",
-  "/privacy-policy/page": "app/privacy-policy/page.js",
-  "/terms-of-service/page": "app/terms-of-service/page.js",
-  "/workday/page": "app/workday/page.js",
-  "/route-optimizer/page": "app/route-optimizer/page.js"
-}
+{}
