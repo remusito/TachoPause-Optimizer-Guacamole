@@ -1,11 +1,7 @@
 {
   "/page": "app/page.js",
-  "/loads/page": "app/loads/page.js",
-  "/telephones/page": "app/telephones/page.js",
-  "/history/page": "app/history/page.js",
-  "/stats/page": "app/stats/page.js",
-  "/rewards/page": "app/rewards/page.js",
   "/privacy-policy/page": "app/privacy-policy/page.js",
   "/terms-of-service/page": "app/terms-of-service/page.js",
-  "/workday/page": "app/workday/page.js"
+  "/workday/page": "app/workday/page.js",
+  "/route-optimizer/page": "app/route-optimizer/page.js"
 }

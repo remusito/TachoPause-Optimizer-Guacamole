@@ -10,7 +10,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 
-const libraries: ("places" | "directions")[] = ['places', 'directions'];
+// Correctly type the libraries array for the Google Maps API
+type Library = "places" | "directions" | "drawing" | "geometry" | "localContext" | "visualization";
+const libraries: Library[] = ['places', 'directions'];
 
 export default function RouteOptimizerPage() {
   const [origin, setOrigin] = useState('');
@@ -203,7 +205,7 @@ export default function RouteOptimizerPage() {
         </div>
 
         <div className="flex-1 bg-muted/20 relative">
-            {!isLoaded && <div className="absolute inset-0 flex items-center justify-center bg-white/50 z-10"><Icons.spinner className="animate-spin h-8 w-8 text-primary"/></div>}
+            {!isLoaded && <div className="absolute inset-0 flex items-center justify-center bg-white/50 z-10"><Icons.spinner className="animate-spin h-8 w-8 text-primary" /></div>}
             {isLoaded && (
                 <GoogleMap
                     mapContainerStyle={{ width: '100%', height: '100%' }}
