@@ -81,7 +81,7 @@ const menuStructure = [
     label: "Información Legal",
     icon: Icons.FileText,
     items: [
-        { href: '/privacy-policy', icon: Icons.Shield, label: 'Política de Privacidad', premium: false },
+        { href: '/privacy-policy', icon: Icons.File, label: 'Política de Privacidad', premium: false },
         { href: '/terms-of-service', icon: Icons.File, label: 'Términos de Uso', premium: false },
     ]
   },
