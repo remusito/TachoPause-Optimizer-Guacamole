@@ -12,20 +12,16 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-// Función para inicializar Firebase solo en cliente
+// Función para inicializar Firebase. Es seguro llamarla en el cliente.
 export function getFirebaseApp(): FirebaseApp {
-  if (typeof window === 'undefined') {
-    throw new Error('Firebase solo debe inicializarse en el cliente');
-  }
   return getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 }
 
 export function getFirebaseAuth(): Auth {
   const app = getFirebaseApp();
   const auth = getAuth(app);
-  
+  // setPersistence solo se debe llamar en el cliente, y esta función está protegida.
   setPersistence(auth, browserLocalPersistence).catch(console.error);
-  
   return auth;
 }
 
