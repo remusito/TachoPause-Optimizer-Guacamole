@@ -8,7 +8,6 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { MapPin, Phone, Radio, Clock, Package, FileText } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 
@@ -32,7 +31,7 @@ export default function EditLoadPage() {
   const { toast } = useToast();
   const router = useRouter();
   const params = useParams();
-  const loadId = params.id as string;
+  const loadId = params?.id as string;
 
   const [load, setLoad] = useState<Load | null>(null);
   const [formData, setFormData] = useState({
@@ -48,7 +47,7 @@ export default function EditLoadPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!firestore || !loadId) return;
+    if (!firestore || !loadId || !user) return;
 
     const fetchLoad = async () => {
       try {
@@ -80,7 +79,7 @@ export default function EditLoadPage() {
       }
     };
 
-    if (user) fetchLoad();
+    fetchLoad();
   }, [firestore, loadId, user]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -107,7 +106,7 @@ export default function EditLoadPage() {
     }
   };
 
-  if (authLoading || loading) {
+  if (authLoading || loading || !loadId) {
     return <div className="flex flex-col min-h-dvh p-4 sm:p-6">Cargando...</div>;
   }
 
@@ -201,7 +200,7 @@ export default function EditLoadPage() {
             <div className="flex gap-2">
               <Button type="submit">Guardar Cambios</Button>
               <Button variant="outline" asChild>
-                <Link href={`/loads/${loadId}`}>Cancelar</Link>
+                <Link href={loadId ? `/loads/${loadId}` : '/loads'}>Cancelar</Link>
               </Button>
             </div>
           </form>

@@ -48,7 +48,7 @@ export default function LoadDetailPage() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (!firestore || !params.id) return;
+    if (!firestore || !params || !params.id) return;
 
     const fetchLoad = async () => {
       try {
@@ -78,7 +78,7 @@ export default function LoadDetailPage() {
     };
 
     fetchLoad();
-  }, [firestore, params.id, router, toast]);
+  }, [firestore, params, router, toast]);
 
   const handleDelete = async () => {
     if (!firestore || !load || !user) return;

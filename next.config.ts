@@ -36,5 +36,3 @@ const nextConfig: NextConfig = {
 };
 
 export default withPWA(nextConfig);
-
-// Trigger new deployment on Vercel
