@@ -9,9 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: mkdir ./out  # Trick the action into thinking this is a static site
+      - run: mkdir -p ./out # Create the directory to prevent the action from failing early
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_TACHOPAUSE_OPTIMIZER_GUACAMOLE }}"
           projectId: tachopause-optimizer-guacamole
+          entryPoint: "." # Force the action to use the current directory
