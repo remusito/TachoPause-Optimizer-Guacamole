@@ -3,7 +3,7 @@
 
 type AppRoutes = "/" | "/dashboard/maintenance/tires" | "/history" | "/loads" | "/loads/[id]" | "/loads/add" | "/loads/edit/[id]" | "/login" | "/maintenance" | "/privacy-policy" | "/regulations" | "/rewards" | "/route-calculator" | "/route-optimizer" | "/speedometer" | "/stats" | "/telephones" | "/terms-of-service" | "/workday"
 type AppRouteHandlerRoutes = "/api/calculate-route" | "/api/reverse-geocode"
-type PageRoutes = never
+type PageRoutes = "/_document"
 type LayoutRoutes = "/"
 type RedirectRoutes = never
 type RewriteRoutes = never
@@ -12,6 +12,7 @@ type Routes = AppRoutes | PageRoutes | LayoutRoutes | RedirectRoutes | RewriteRo
 
 interface ParamMap {
   "/": {}
+  "/_document": {}
   "/api/calculate-route": {}
   "/api/reverse-geocode": {}
   "/dashboard/maintenance/tires": {}
