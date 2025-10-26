@@ -36,3 +36,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TACHOPAUSE_OPTIMIZER_171_AA315 }}'
           projectId: tachopause-optimizer-171-aa315
           channelId: live
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
