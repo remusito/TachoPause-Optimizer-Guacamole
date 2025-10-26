@@ -11,7 +11,9 @@ const withPWA = withPWAInit({
 });
 
 const nextConfig: NextConfig = {
+  output: 'export', // 👈 ESTO ES CRÍTICO
   images: {
+    unoptimized: true, // 👈 Necesario para export estático
     remotePatterns: [
       {
         protocol: 'https',

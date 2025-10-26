@@ -18,7 +18,7 @@ jobs:
           node-version: '20'
        
       - name: Install dependencies
-        run: npm install
+        run: npm ci
        
       - name: Build project
         env:
@@ -28,6 +28,7 @@ jobs:
           NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
           NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}
           NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}
+          NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}
         run: npm run build
        
       - name: Deploy to Firebase Hosting
@@ -37,4 +38,11 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TACHOPAUSE_OPTIMIZER_171_AA315 }}'
           projectId: 'tachopause-optimizer-171-aa315'
           channelId: live
-          entryPoint: './out'
+```
+
+### 3. **NO olvides agregar el secret que falta**
+
+En GitHub → Settings → Secrets and variables → Actions:
+```
+Nombre: NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+Valor: G-7TN917672Z
