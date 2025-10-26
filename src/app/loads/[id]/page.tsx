@@ -37,6 +37,10 @@ interface Load {
   createdAt: any;
 }
 
+export async function generateStaticParams() {
+  return [];
+}
+
 export default function LoadDetailPage() {
   const params = useParams();
   const router = useRouter();
