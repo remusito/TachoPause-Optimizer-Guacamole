@@ -35,4 +35,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TACHOPAUSE_OPTIMIZER_171_AA315 }}'
           projectId: tachopause-optimizer-171-aa315
-          # ELIMINADO: entryPoint: ./out
+          channelId: live
