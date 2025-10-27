@@ -36,6 +36,8 @@ Sigue estos pasos para poner en marcha el proyecto en tu entorno local.
 - [Node.js](https://nodejs.org/en/) (versión 18 o superior)
 - `npm`, `yarn` o `pnpm`
 
+echo "# trigger deploy" >> README.md
+
 ### 1. Clona el Repositorio
 
 ```bash

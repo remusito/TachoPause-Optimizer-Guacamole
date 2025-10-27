@@ -1,5 +1,14 @@
 {
-  "node": {},
+  "node": {
+    "66c60dfda9d08bd4794d8eeab09fbd1dc8a50623": {
+      "workers": {
+        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fuser%2FTachoPause-Optimizer%2Fsrc%2Flib%2Fdata.ts%22%2C%5B%22addHistoryItem%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/page": "action-browser"
+      }
+    }
+  },
   "edge": {},
-  "encryptionKey": "qxtpLz6Cr1/RX2l6GIsl6Yfd5zUMR3qz5XjD0rNiZJ8="
+  "encryptionKey": "hFQz/HCf13NNt7bJHXGnC/xIfOP+thsy4Hgw+RKHpVY="
 }
