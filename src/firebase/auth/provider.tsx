@@ -169,6 +169,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signOut = async () => {
     if (auth) {
       await firebaseSignOut(auth);
+      setUser(null);
+      setIsPremium(false);
     }
   };
 
